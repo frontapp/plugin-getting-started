@@ -6,7 +6,6 @@ function App({context}) {
 let user = context.teammate.name;
 let recipient = context.conversation.recipient.name;
 const messageId = context.conversation.id;
-console.log(context.conversation);
 const draft =  {
   content: {
     body: `Hello ${recipient}!`,
