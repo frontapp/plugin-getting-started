@@ -16,6 +16,8 @@ function Tutorial() {
         if (response.results.length > 0) {
           const latestMessageIndex = response.results.length - 1;
           setLatestMessageId(response.results[latestMessageIndex].id)
+        } else {
+          setLatestMessageId(undefined);
         }
       });
   }, [context]);
