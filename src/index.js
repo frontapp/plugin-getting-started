@@ -3,18 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Front from '@frontapp/plugin-sdk';
+import {FrontContextProvider} from './providers/frontContext';
 
-Front.contextUpdates.subscribe(context => {
-  ReactDOM.render(
-    <React.StrictMode>
-      <App context={context} />
-    </React.StrictMode>,
-    document.getElementById('root')
-  );
-});
-
-
+ReactDOM.render(
+  <React.StrictMode>
+    <FrontContextProvider>
+      <App />
+    </FrontContextProvider>
+  </React.StrictMode>,
+  document.getElementById('root')
+);
 
 
 // If you want to start measuring performance in your app, pass a function
