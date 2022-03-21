@@ -3,7 +3,7 @@ import { useFrontContext } from '../providers/frontContext';
 
 function Tutorial() {
   const context = useFrontContext();
-  const [userStats, setUserStats] = useState({});
+  const [companyStats, setCompanyStats] = useState({});
   const [latestMessageId, setLatestMessageId] = useState();
 
   const user = (context.teammate && context.teammate.name) ? context.teammate.name : 'world';
@@ -24,10 +24,13 @@ function Tutorial() {
 
   useEffect(() => {
     // Pseudo-code for fetching data from an external API or database
-    setUserStats(
+    setCompanyStats(
       {
-        'score': 4.8,
-        'maxScore': 5,
+        'company': 'Blue Rose Labs',
+        'accountNumber': 54968483,
+        'activeOrder': 8347,
+        'status': 'Shipped',
+        'deliveryDate': 'March 31st'
       }
     );
   }, []);
@@ -38,7 +41,7 @@ function Tutorial() {
 
     context.createDraft({
       content: {
-        body: `Hello ${recipient}!`,
+        body: `Hello ${recipient}! Order ${companyStats.activeOrder} is ${companyStats.status} and expected to arrive on ${companyStats.deliveryDate}.`,
         type: 'text'
       },
       replyOptions: {
@@ -51,7 +54,23 @@ function Tutorial() {
   return (
     <div className="App">
       <p>Hello {user}!</p>
-      <p>Your score is <b>{userStats.score}</b> out of <b>{userStats.maxScore}</b>. Well done!</p>
+      <h4>Contact details:</h4>
+      <table>
+        <tbody>
+          <tr>
+            <td><b>Company</b></td>
+            <td>{companyStats.company}</td>
+          </tr>
+          <tr>
+            <td><b>Account number</b></td>
+            <td>{companyStats.accountNumber}</td>
+          </tr>
+          <tr>
+            <td><b>Active order</b></td>
+            <td><a href="https://example.com">{companyStats.activeOrder}</a></td>
+          </tr>
+        </tbody>
+      </table>
       {latestMessageId && <button onClick={onCreateDraftClick}>Reply</button>}
     </div>
   );
