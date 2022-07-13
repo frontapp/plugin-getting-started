@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { useFrontContext } from '../providers/frontContext';
+import {Paragraph, Heading, Button} from '@frontapp/ui-kit';
+
 
 function Tutorial() {
   const context = useFrontContext();
@@ -53,25 +55,25 @@ function Tutorial() {
 
   return (
     <div className="App">
-      <p>Hello {user}!</p>
+      <Paragraph>Hello {user}!</Paragraph>
       <h4>Contact details:</h4>
       <table>
         <tbody>
           <tr>
-            <td><b>Company</b></td>
+            <td><Heading>Company</Heading></td>
             <td>{companyStats.company}</td>
           </tr>
           <tr>
-            <td><b>Account number</b></td>
+            <td><Heading>Account number</Heading></td>
             <td>{companyStats.accountNumber}</td>
           </tr>
           <tr>
-            <td><b>Active order</b></td>
+            <td><Heading>Active order</Heading></td>
             <td><a href="https://example.com">{companyStats.activeOrder}</a></td>
           </tr>
         </tbody>
       </table>
-      {latestMessageId && <button onClick={onCreateDraftClick}>Reply</button>}
+      {latestMessageId && <Button onClick={onCreateDraftClick}>Reply</Button>}
     </div>
   );
 }
