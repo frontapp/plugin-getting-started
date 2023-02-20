@@ -34,7 +34,7 @@ function App() {
       );
     default:
       console.error(`Unsupported context type: ${context.type}`);
-      break;
+      return null;
   };
 }
 

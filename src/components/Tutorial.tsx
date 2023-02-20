@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import { useFrontContext } from '../providers/frontContext';
 import {Paragraph, Heading, Button} from '@frontapp/ui-kit';
+import { ApplicationMessageId, SingleConversationContext } from '@frontapp/plugin-sdk';
 
 
 function Tutorial() {
-  const context = useFrontContext();
-  const [companyStats, setCompanyStats] = useState({});
-  const [latestMessageId, setLatestMessageId] = useState();
+  const context = useFrontContext() as SingleConversationContext;
+  const [companyStats, setCompanyStats] = useState({company: '', accountNumber: 0, activeOrder: 0, status: '', deliveryDate: ''});
+  const [latestMessageId, setLatestMessageId] = useState<ApplicationMessageId>();
 
   const user = (context.teammate && context.teammate.name) ? context.teammate.name : 'world';
   const recipient = (context.conversation && context.conversation.recipient && context.conversation.recipient.name) ? context.conversation.recipient.name : 'there';
@@ -51,7 +52,7 @@ function Tutorial() {
         originalMessageId: latestMessageId
       }
     })
-  };  
+  };
 
   return (
     <div className="App">

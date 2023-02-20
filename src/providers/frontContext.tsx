@@ -1,11 +1,13 @@
-import {createContext, useContext, useEffect, useState} from 'react';
+import {createContext, PropsWithChildren, useContext, useEffect, useState} from 'react';
 import Front from '@frontapp/plugin-sdk';
+import { WebViewContext } from '@frontapp/plugin-sdk/dist/webViewSdkTypes'
 
 /*
  * Context.
  */
 
-export const FrontContext = createContext();
+
+export const FrontContext = createContext<WebViewContext | undefined>(undefined);
 
 /*
  * Hook.
@@ -19,9 +21,8 @@ export function useFrontContext() {
  * Component.
  */
 
-export const FrontContextProvider = ({children}) => {
-  const [context, setContext] = useState();
-
+export const FrontContextProvider = ({children}: PropsWithChildren) => {
+  const [context, setContext] = useState<WebViewContext>();
   useEffect(() => {
     const subscription = Front.contextUpdates.subscribe(frontContext => {
       setContext(frontContext);
@@ -31,7 +32,7 @@ export const FrontContextProvider = ({children}) => {
 
   return (
     <FrontContext.Provider value={context}>
-      {children}  
+      {children}
     </FrontContext.Provider>
   )
 }
